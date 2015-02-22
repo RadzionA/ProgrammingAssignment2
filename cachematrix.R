@@ -5,19 +5,23 @@
 # For this assignment, assume that the matrix supplied is always invertible.
 ####################################################################
 
+
 # makeCacheMatrix function creates a special "matrix" object that keeps matrix data and can cache its inverse
 # function is used for storage data, not processing it
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
+    
+    # set new matrix and NULL for inverted matrix
     set <- function(y) {
         message("Setting new Matrix")
         x <<- y
-        inv <<- NULL
+        inv <<- NULL # preventing keeping old inverted for new matrix!
     }
-    get <- function() x
-    setSolve <- function(inv) inv <<- inv
-    getSolve <- function() inv
+    get <- function() x # take our matrix data
+    setSolve <- function(inv) inv <<- inv # add inverted matrix to cache
+    getSolve <- function() inv  # take inverted matrix from cache (or NULL)
     
+    #our function returns list of 'methods' with their values
     list(set = set, get = get,
          setSolve = setSolve,
          getSolve = getSolve)       
@@ -47,6 +51,7 @@ cacheSolve <- function(x, ...) {
     }
     inv # return inverted matrix
 }
+
 
 ####### Working examples #######
 # Create testing matrix
